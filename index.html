@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rikkei Student Admin</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- 1. Đầu trang -->
+    <!-- 1.1 Thanh header ngang -->
+    <header class="header-bar">
+        <span class="logo">Rikkei Student Admin</span>
+        <div class="profile-info">
+            <p class="profile-greeting">Chào, Chị Lan</p>
+            <div class="profile-photo">L</div>
+        </div>
+        <!-- Nút hamburger (menu 3 gạch) -->
+        <button class="menu-toggle" aria-label="Menu" type="button">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button> 
+    </header>
+
+    <!-- 1.2 Thanh sidebar dọc -->
+    <nav class="sidebar">
+        <ul>
+            <li><a href="#" class="sidebar-item">Tổng quan</a></li>
+            <li><a href="#">Sinh viên</a></li>
+            <li><a href="#">Lớp học</a></li>
+            <li><a href="#">Điểm số</a></li>
+            <li><a href="#">Cài đặt</a></li>
+        </ul>
+    </nav>
+
+    <!-- 2. Nội dung chính -->
+    <main>
+        <section>
+            <h1>Tổng quan</h1>
+            <!-- 2.1 Bảng tổng quan -->
+            <div class="summary-board">
+                <div class="summary-card">
+                    <p class="summary-note">Tổng sinh viên</p>
+                    <p class="summary-data">1.250</p>
+                    <p class="summary-note">+32 trong tháng</p>
+                    <a href="#" class="click-to-list">Xem danh sách</a>
+                </div>
+                <div class="summary-card">
+                    <p class="summary-note">Đang học</p>
+                    <p class="summary-data">1.080</p>
+                    <p class="summary-note">86% tổng số</p>
+                    <a href="#" class="click-to-list">Xem danh sách</a>
+                </div>
+                <div class="summary-card">
+                    <p class="summary-note">Bảo lưu</p>
+                    <p class="summary-data">96</p>
+                    <p class="summary-note">+5 trong tháng</p>
+                    <a href="#" class="click-to-list">Xem danh sách</a>
+                </div>
+                <div class="summary-card">
+                    <p class="summary-note">Nghỉ học</p>
+                    <p class="summary-data">74</p>
+                    <p class="summary-note">-3 trong tháng</p>
+                    <a href="#" class="click-to-list">Xem danh sách</a>
+                </div>
+            </div>                 
+        </section>
+        <section>
+            <!-- 2.2 Thông tin sinh viên -->
+             <div class="student-info-board">
+                <h2>Sinh viên mới nhập học</h2>
+                <div class="student-info-card">
+                    <div class="student-avatar">A</div>
+                    <div class="student-name-class">                   
+                        <p class="student-name">Nguyễn Văn An</p>
+                        <p class="student-class">SV2024001 - CNTT01</p>
+                    </div>
+                    <p class="student-email">an.nv@rikkei.example</p>
+                    <p class="student-status status-studying">Đang học</p>
+                </div>
+                <div class="student-info-card">
+                    <div class="student-avatar">H</div>
+                    <div class="student-name-class">
+                        <p class="student-name">Trần Thu Hà</p>
+                        <p class="student-class">SV2024002 - KT02</p>
+                    </div>
+                    <p class="student-email">ha.tt@rikkei.example</p>
+                    <p class="student-status status-studying">Đang học</p>
+                </div>
+                <div class="student-info-card">
+                    <div class="student-avatar">Q</div>
+                    <div class="student-name-class">                   
+                        <p class="student-name">Lê Minh Quân</p>
+                        <p class="student-class">SV2024003 - CNTT01</p>
+                    </div>
+                    <p class="student-email">quan.lm@rikkei.example</p>
+                    <p class="student-status status-absence">Bảo lưu</p>
+                </div>
+                <div class="student-info-card">
+                    <div class="student-avatar">M</div>
+                    <div class="student-name-class">
+                        <p class="student-name">Phạm Ngọc Mai</p>
+                        <p class="student-class">SV2024004 - KT02</p>
+                    </div>
+                    <p class="student-email">mai.pn@rikkei.example</p>
+                    <p class="student-status status-studying">Đang học</p>
+                </div>
+                <div class="student-info-card">
+                    <div class="student-avatar">B</div>
+                    <div class="student-name-class">                   
+                        <p class="student-name">Đỗ Quốc Bảo</p>
+                        <p class="student-class">SV2024005 - CNTT03</p>
+                    </div>
+                    <p class="student-email">bao.dq@rikkei.example</p>
+                    <p class="student-status status-stop">Nghỉ học</p>               
+                </div>
+            </div>                                    
+        </section>
+        
+        <!-- 2.3 Thêm sinh viên -->
+        <section class="add-new-card">
+            <h2>Thêm nhanh sinh viên</h2>
+            <form>
+                <div class="input-new-info-grid">
+                    <div class="input-new-info">
+                        <label for="fullname">Họ tên</label>
+                        <input class="input" type="text" id="fullname" name="fullname" placeholder="Nguyễn Văn A" required>
+                    </div>
+                    <div class="input-new-info">
+                        <label for="studentid">Mã SV</label>
+                        <input class="input" type="text" id="studentid" name="studentid" placeholder="SV2024006" required>
+                    </div>
+                    <div class="input-new-info">
+                        <label for="class">Lớp</label>
+                        <select name="class" id="class" class="input">
+                            <option value="CNTT01">CNTT01</option>
+                            <option value="KT02">KT02</option>
+                            <option value="CNTT03">CNTT03</option>
+                        </select>
+                    </div>
+                    <div class="input-new-info">
+                        <label for="email">Email</label>
+                        <input class="input" type="email" id="email" name="email" placeholder="ban@rikkei.example" required>
+                    </div>
+                </div>
+                <button type="submit" class="add-new-student-button">Thêm sinh viên</button>            
+            </form>
+        </section>
+    </main>
+    <!-- 3. Chân trang -->
+    <footer>
+        <p>Rikkei Student Admin - Dữ liệu minh họa</p>
+    </footer>
+</body>
+</html>

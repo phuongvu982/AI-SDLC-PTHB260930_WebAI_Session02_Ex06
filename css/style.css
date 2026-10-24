@@ -1,0 +1,474 @@
+/* Toàn bộ trang */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --color-purple: #6d28d9;
+    --color-dark-purple: #2e1065;
+    --color-light-purple: #f3e8ff;
+    --color-bg: #f5f5f7;
+    --color-border: #e4e4e7;
+    --color-text: #18181b;
+    --color-text-sub: #52525b;
+    --color-white: #ffffff;
+    --color-studying-bg: #dcfce7;
+    --color-studying-text: #166534;
+    --color-absence-bg: #fef3c7;
+    --color-absence-text: #92400e;
+    --color-stop-bg: #fee2e2;
+    --color-stop-text: #991b1b;
+
+    /* Khoảng cách dùng biến theo Yêu cầu 6 */
+    --spacing-xs: 4px;
+    --spacing-sm: 8px;
+    --spacing-md: 16px;
+    --spacing-lg: 24px;
+    --spacing-xl: 32px;
+}
+
+body {
+    font-family: Arial;
+}
+
+main {
+    margin-left: 220px;  /* Né sidebar sang bên trái */
+    margin-top: 56px;      /* Né header 56px phía trên */
+    background-color: var(--color-bg);     /* Nền xám nhạt toàn trang #f5f5f7 */
+    min-height: calc(100vh - 56px);        /* Phủ kín chiều cao còn lại của màn hình */
+    padding: 32px;                         /* Khoảng cách viền chuẩn 32px như mẫu */
+}
+
+/* 1.1. Thanh header ngang */
+.header-bar{
+    background-color: var(--color-dark-purple);
+    display: flex;
+    justify-content: space-between; /* Đẩy các element ra 2 đầu thanh header */
+    align-items: center;
+    height: 56px;          /* Cố định chiều cao chuẩn 56px */
+    padding: 12px 0;
+    position: fixed;       /* Ghim cố định ở đỉnh màn hình */
+    top: 0;
+    left: 0;
+    width: 100%;           /* Trải dài 100% chiều ngang */
+    z-index: 100;          /* Cao hơn sidebar (90) */
+}
+
+.logo {
+    color: var(--color-white);
+    font-size: 20px;
+    font-weight: bold;
+    padding-left: 20px;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding-right: 20px;
+}
+
+.profile-greeting {
+    color: var(--color-white);
+    font-size: 16px;
+}
+
+.profile-photo {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%; /* Tạo khung tròn */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: var(--color-white);
+    font-weight: bold;
+    background-color: var(--color-purple);
+}
+
+/* 1.2. Thanh sidebar dọc */
+.sidebar {
+    position: fixed;                       /* Ghim cố định ở cạnh trái màn hình */
+    top: 56px;                             /* Nằm ngay dưới thanh header (56px) */
+    left: 0;
+    bottom: 0;                             /* KÉO DÀI XUỐNG TẬN ĐÁY MÀN HÌNH */
+    width: 220px;                          /* Chiều rộng chuẩn 220px */
+    background-color: var(--color-dark-purple); /* Nền tím phủ toàn bộ chiều cao */
+    overflow-y: auto;                      /* Thêm thanh cuộn nếu màn hình quá ngắn */
+    z-index: 90;
+}
+
+.sidebar ul {
+    width: 100%;
+    padding: 16px 0;
+    display: flex;
+    flex-direction: column; /* Chuyển sidebar thành cột dọc */
+    list-style-type: none;   
+}
+
+.sidebar li a {
+    text-decoration: none;
+    color: var(--color-white);
+    display: flex;      /* Giúp thẻ a phủ kín 100% bề ngang li */
+    align-items: center;
+    padding: 0 26px;
+    height: 48px;                   /* Chiều cao chuẩn mỗi hàng */
+    width: 100%;                    /* Phủ kín chiều rộng 220px của sidebar */
+    border-left: 4px solid transparent; /* Tạo viền trong suốt cho toàn bộ item trong list */
+    transition: background-color 0.2s, border-color 0.2s;
+}
+
+/* Hiệu ứng khi rê chuột vào các mục menu khác */
+.sidebar li a:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Khi click vào thì có gạch chân */
+.sidebar li a:focus {
+    text-decoration-line: underline;
+}
+
+/* Mục đang được chọn (Tổng quan) */
+.sidebar li a.sidebar-item {
+    font-weight: bold;
+    background-color: var(--color-purple); /* Nền tím phủ trọn 220px */
+    border-left: 4px solid var(--color-white); /* Gạch trắng dày 4px như mẫu */
+}
+
+/* Menu 3 gạch */
+.menu-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    padding: 4px;
+    width: 32px;
+    height: 26px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* 3 vạch giãn đều theo chiều dọc */
+    border-radius: 4px;
+    transition: background-color 0.2s, opacity 0.2s;   
+}
+
+/* Từng vạch trắng trong nút */
+.menu-toggle .bar {
+    width: 100%;
+    height: 3px; /* Độ dày của vạch */
+    background-color: var(--color-white);/* Màu trắng */
+    border-radius: 2px;
+}
+
+/* Phản hồi khi rê chuột */
+.menu-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1); /* Nền sáng nhẹ */
+}
+
+/* Phản hồi khi bấm phím Tab (Focus) */
+.menu-toggle:focus-visible {
+    outline: 2px solid var(--color-white);       /* Viền outline nổi bật */
+    outline-offset: 2px;                         /* Không làm đổi kích thước hay giật layout */
+}
+
+/* 2.1. Bảng tổng quan */
+h1 {
+    margin-bottom: 16px;
+}
+
+.summary-board {
+    margin-top: 0;
+    margin-bottom: 28px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+}
+
+.summary-card {
+    background-color: var(--color-white);
+    border-radius: 8px;
+    border: 1px solid var(--color-border);
+    padding: 18px 20px;
+}
+
+/* Thẻ 1: Tổng sinh viên (Viền tím) */
+.summary-card:nth-child(1) {
+    border-left: 5px solid var(--color-purple);
+}
+/* Thẻ 2: Đang học (Viền xanh lá #166534) */
+.summary-card:nth-child(2) {
+    border-left: 5px solid var(--color-studying-text);
+}
+/* Thẻ 3: Bảo lưu (Viền cam/nâu #92400e) */
+.summary-card:nth-child(3) {
+    border-left: 5px solid var(--color-absence-text);
+}
+/* Thẻ 4: Nghỉ học (Viền đỏ #991b1b) */
+.summary-card:nth-child(4) {
+    border-left: 5px solid var(--color-stop-text);
+}
+
+.summary-note {
+    color: var(--color-text-sub);
+    font-size: 16px;   
+    margin-bottom: 14px;
+}
+
+.summary-data {
+    font-size: 35px;
+    font-weight: bold;
+    margin-bottom: 14px;
+}
+
+.click-to-list {
+    text-decoration: none;
+    color: var(--color-purple);
+    font-weight: bold;
+    display: inline-block;
+    transition: text-decoration 0.2s;
+}
+
+/* Hiệu ứng hover và focus cho link Xem danh sách (Yêu cầu 7) */
+.click-to-list:hover {
+    text-decoration: underline;
+}
+
+.click-to-list:focus-visible {
+    outline: 2px solid var(--color-purple);
+    outline-offset: 2px;
+    border-radius: 2px;
+}
+
+/* 2.2 Thông tin sinh viên */
+.student-info-board {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
+}
+
+h2 {
+    margin-bottom: 16px;
+}
+
+/* Từng dòng thông tin sinh viên */
+.student-info-card {
+    display: flex;
+    align-items: center; /* Căn đều theo chiều dọc */
+    gap: 16px;
+    padding: 16px 0; /* Chiều cao dòng */
+    border-top: 1px solid var(--color-border); /* Đường kẻ phía trên dòng */
+}
+
+.student-avatar {
+    display: flex;
+    align-items: center;  /* Căn đều theo chiều dọc */
+    justify-content: center; /* Căn đều theo chiều ngang */
+    width: 40px;
+    height: 40px; /* Vẽ khung hình vuông */
+    border-radius: 8px;
+    background-color: var(--color-light-purple);
+    font-weight: bold;
+    color: var(--color-purple);
+}
+
+/* Nhóm gộp tên và lớp */
+.student-name-class {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    width: 290px;
+    flex-shrink: 0; /* BẮT BUỘC: Khóa cứng, không cho flexbox bóp méo độ rộng */
+}
+
+.student-name {
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.student-class {
+    color: var(--color-text-sub);
+    font-size: 14px;
+}
+
+.student-email {
+    color: var(--color-text-sub);
+    font-size: 14px;
+    flex: 1;      /* Co giãn tự do chiếm trọn phần giữa */
+    text-align: left;  /* Căn trái email theo đúng ảnh mẫu 1280px */
+}
+
+/* Badge chung */
+.student-status {
+    margin-left: auto;   /* Tự động dạt về sát mép lề phải */
+    padding: 4px 12px;
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--color-absence-text);
+    height: 24px;
+    border-radius: 9999px;
+    background-color: var(--color-absence-bg);
+}
+
+/* Badge đang học */
+.status-studying {
+    color: var(--color-studying-text);
+    background-color: var(--color-studying-bg);
+}
+
+/* Badge nghỉ học */
+.status-stop {
+    color: var(--color-stop-text);
+    background-color: var(--color-stop-bg);
+}
+
+/* Badge bảo lưu */
+.status-absence {
+    color: var(--color-absence-text);
+    background-color: var(--color-absence-bg);
+}
+
+/* 2.3 Thêm sinh viên */
+.add-new-card {
+    background-color: var(--color-white);
+    border: 1px solid var(--color-border);
+    border-radius: 8px;
+    padding: 24px;
+    margin-bottom: 32px;
+}
+
+h2 {
+    margin-bottom: 20px;
+}
+
+/* Phân đều các trường thông tin thành lưới 2 cột */
+.input-new-info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 24px;
+    row-gap: 16px;
+}
+
+.input-new-info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+label {
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--color-text);   
+}
+
+.input {
+    padding: 10px 14px;
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+    background-color: var(--color-white);
+    font-size: 14px;
+}
+
+/* Khi rê chuột qua (Hover) - Viền tím nhạt + bóng nhẹ */
+.input:hover {
+    border-color: #a78bfa; /* Viền chuyển sang tím nhạt */
+    box-shadow: 0 2px 6px rgba(109, 40, 217, 0.12); /* Đổ bóng nhẹ phía dưới */
+}
+
+/* Khi click chuột vào để gõ chữ (Focus) - Viền sáng rõ ràng */
+.input:focus {
+    border-color: var(--color-purple); /* Viền tím đậm chủ đạo */
+    box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.18); /* Vòng hào quang tím nhẹ ôm quanh viền */
+}
+
+.add-new-student-button {
+    height: 42px;
+    width: fit-content;
+    padding: 0 24px;
+    background-color: var(--color-purple);
+    color: var(--color-white);
+    font-weight: bold;
+    font-size: 16px;
+    border: 1px solid transparent; /* Giữ sẵn viền 1px để khi hover không làm đổi kích thước (Yêu cầu 7) */
+    border-radius: 8px;
+    margin-top: 16px;
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.add-new-student-button:hover {
+    background-color: var(--color-white);
+    color: var(--color-purple);
+    border-color: var(--color-purple);
+}
+
+.add-new-student-button:focus-visible {
+    color: var(--color-white);
+    background-color: var(--color-dark-purple);
+    box-shadow: 0 0 0 3px rgba(109, 40, 217, 0.18); /* Vòng hào quang tím nhẹ ôm quanh viền */
+    outline: none;
+}
+
+/* 3. Chân trang */
+footer {
+    margin-left: 220px;    /* Né sidebar 220px sang bên trái */
+    text-align: center;    /* Căn giữa chữ */
+    padding: 24px 0;
+    color: var(--color-text-sub);
+    font-size: 13px;
+    background-color: var(--color-bg);
+}
+
+/* Khi màn hình nhỏ hơn 768px (Mobile 360px & 320px) */
+@media (max-width: 767px) {
+    .sidebar {
+        display: none;
+    } /* Ẩn sidebar */
+
+    .profile-info {
+        display: none;
+    } /* Ẩn lời chào */
+
+    /* Hiển thị menu 3 gạch */
+    .menu-toggle {
+        display: flex;
+    }
+
+    /* Bỏ thụt lề 220px cho màn hình nhỏ */
+    main {
+        margin-left: 0;
+        padding: 20px 16px;
+    }
+
+    footer {
+        margin-left: 0;
+    }
+
+    /* Thẻ thống kê xếp 2 cột x 2 dòng trên điện thoại (Yêu cầu 1) */
+    .summary-board {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 12px;
+    }
+
+    /* 3. Ẩn cột email trên điện thoại theo ảnh mẫu (Yêu cầu 1) */
+    .student-email {
+        display: none;
+    }
+
+    /* 4. Tên sinh viên co giãn linh hoạt trên mobile không bị tràn ngang ở 320px (Yêu cầu 9) */
+    .student-name-class {
+        width: auto;
+        flex: 1;
+    }
+
+    /* 5. Form xếp thành 1 cột */
+    .input-new-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    /* 6. Nút thêm sinh viên chiếm toàn chiều rộng trên điện thoại */
+    .add-new-student-button {
+        width: 100%;
+    }
+}
